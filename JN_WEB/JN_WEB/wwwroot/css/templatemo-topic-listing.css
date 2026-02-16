@@ -889,7 +889,7 @@ blockquote {
   CUSTOM FORM               
 -----------------------------------------*/
 .custom-form .form-control {
-  border-radius: var(--border-radius-large);
+  border-radius: 5px;
   color: var(--p-color);
   margin-bottom: 24px;
   padding-top: 13px;

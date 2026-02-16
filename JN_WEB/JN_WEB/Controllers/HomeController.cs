@@ -6,15 +6,22 @@ namespace JN_WEB.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+		//Pantalla de inicio
+		public IActionResult Index()
         {
             return View();
         }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+		//Pantalla de login
+		[HttpGet]
+		public IActionResult Login()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-    }
+            return View();
+		}
+		//Procesar el login
+		[HttpPost]
+		public IActionResult Login(Usuario model)
+		{
+			return View();
+		}
+	}
 }

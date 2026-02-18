@@ -6,11 +6,14 @@ namespace JN_WEB.Controllers
 {
     public class HomeController : Controller
     {
-		//Pantalla de inicio
+		//Pantalla de iniciO
+		[HttpGet]
 		public IActionResult Index()
         {
             return View();
         }
+
+		#region Inicio de sesion
 		//Pantalla de login
 		[HttpGet]
 		public IActionResult Login()
@@ -23,5 +26,32 @@ namespace JN_WEB.Controllers
 		{
 			return View();
 		}
+		#endregion
+
+		#region Crear cuenta	
+		[HttpGet]
+		public IActionResult Registro()
+		{
+			return View();
+		}
+		[HttpPost]
+		public IActionResult Registro(Usuario model)
+		{
+			return View();
+		}
+		#endregion
+
+		#region Recuperar acceso
+		[HttpGet]
+		public IActionResult RecuperarAcceso()
+		{
+			return View();
+		}
+		[HttpPost]
+		public IActionResult RecuperarAcceso(Usuario model)
+		{
+			return View();
+		}
+		#endregion
 	}
 }

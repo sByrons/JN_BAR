@@ -1,4 +1,4 @@
-﻿namespace JN_WEB.Models
+﻿namespace JN_API.Models
 {
 	public class Usuario
 	{
@@ -7,4 +7,7 @@
 		public string CorreoElectronico { get; set; } = string.Empty;
 		public string Contrasenna { get; set; } = string.Empty;
 	}
+	
+
 }
+

@@ -9,20 +9,32 @@ namespace JN_API.Controllers
     [Route("[controller]")]
     public class HomeController : ControllerBase
     {
-        [HttpPost(Name = "Registro Usuario")]
+        private readonly IConfiguration _config;
+
+        public HomeController(IConfiguration config)
+        {
+            _config = config;
+		}
+
+		[HttpPost("Registro Usuario")]
         public IActionResult RegistroUsuario(Usuario model)
         {
-            using (var context = new SqlConnection("BYRON;Database=JN_DB;Integrated Security=True;"))
+            using (var context = new SqlConnection(_config.GetValue<string>("ConnectionStrings:DefaultConnection")))
             {
                 var parametros = new DynamicParameters();
                 parametros.Add("@Indentificacion", model.Indentificacion);
-                parametros.Add("@Nombre", model.Nombre);    
+                parametros.Add("@Nombre", model.Nombre);
                 parametros.Add("@CorreoElectronico", model.CorreoElectronico);
                 parametros.Add("@Contrasenna", model.Contrasenna);
 
-				context.Execute("sp_RegistrarCuenta", parametros);
+                var result = context.Execute("sp_RegistrarCuenta", parametros);
+
+                if (result <= 0)
+                    return BadRequest(new { message = "No se registró su información" });
+
+                return Ok(new {message = "Su información se registró correctamente"});
             }
-            return Ok();
+           
      
         }
 

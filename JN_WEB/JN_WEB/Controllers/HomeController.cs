@@ -34,7 +34,16 @@ namespace JN_WEB.Controllers
 		[HttpPost]
 		public IActionResult Login(Usuario model)
 		{
+			using var client = _http.CreateClient();
+			var url = _config.GetValue<string>("Valores:UrlAPI") + "Home/IniciarSesion";
+			var result = client.PostAsJsonAsync(url, model).Result;
+			if (result.StatusCode == HttpStatusCode.OK)
+			{
+				return RedirectToAction("Index", "Home");
+			}
+			ViewBag.Mensaje = result.Content.ReadAsStringAsync().Result;
 			return View();
+			
 		}
 		#endregion
 
@@ -54,7 +63,7 @@ namespace JN_WEB.Controllers
 				{
 					return RedirectToAction("Login", "Home");
 				}
-				ViewBag.Mensaje = result.Content.ReadFromJsonAsync<string> ().Result;
+				ViewBag.Mensaje = result.Content.ReadAsStringAsync().Result;
 				return View();
 			
 		}
